@@ -19,6 +19,11 @@ impl fmt::Display for Matrix{
     }
 }
 
+fn transpose(mat: Matrix) -> Matrix {
+ let Matrix(a,b,c,d) = mat;
+ Matrix(a,c,b,d)
+}
+
 
 fn main() {
     // A tuple with a bunch of different types
@@ -61,5 +66,6 @@ fn main() {
     let matrix = Matrix(1.1, 1.2, 2.1, 2.2);
     println!("{}", matrix);
 
+    println!("{}", transpose(matrix));
 }
 
