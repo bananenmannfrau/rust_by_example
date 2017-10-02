@@ -13,6 +13,7 @@ struct Nil;
 struct Pair(i32, f32);
 
 // A struct with two fields
+#[derive(Debug)]
 struct Point {
     x: f32,
     y: f32,
@@ -20,6 +21,7 @@ struct Point {
 
 // Structs can be reused as fields of another struct
 #[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     p1: Point,
     p2: Point,
@@ -29,6 +31,12 @@ struct Rectangle {
 fn react_area(rect: Rectangle) -> f32 {
     let Rectangle{p1: Point{x: x1,y: y1},p2:  Point{x: x2,y: y2}} = rect;
     (((x1-x2).powf(2.0)) +  ((y1-y2).powf(2.0))).sqrt()
+}
+
+fn square(p: Point, width: f32) -> Rectangle {
+    let Point{x: x1,y: y1} = p;
+    let new_point = Point{x: x1+width,y: y1};
+    Rectangle{p1: p, p2: new_point}
 }
 
 fn main() {
@@ -67,8 +75,11 @@ fn main() {
 
     // Destructure a tuple struct
     let Pair(integer, decimal) = pair;
+    
+    let p3 = Point{x: 1f32, y: 2f32};
 
     println!("pair contains {:?} and {:?}", integer, decimal);
     println!("area of rect = {}", react_area(_rectangle));
+    println!("new react = {:?}", square(p3, 1.5));
 }
 
